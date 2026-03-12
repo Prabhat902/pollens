@@ -27,8 +27,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
-        <div className="gradient-bg" />
-        {children}
+        {/* Animated Cyberpunk Background */}
+        <div className="bg-mesh" />
+        <div className="bg-orb-1" />
+        <div className="bg-orb-2" />
+        
+        <div className="relative z-0">
+          {children}
+        </div>
       </body>
     </html>
   );

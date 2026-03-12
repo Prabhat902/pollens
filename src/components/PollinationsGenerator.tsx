@@ -215,11 +215,11 @@ export default function PollinationsGenerator() {
         <div className="glass-panel p-6 rounded-3xl flex flex-col gap-4">
              {/* Resolution dropdown only - Mode toggle and Threads removed */}
              <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">Resolution</label>
+                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Resolution</label>
                 <select 
                     value={resolution} 
                     onChange={e => setResolution(e.target.value)}
-                    className="bg-black/20 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-sky-500 [&>option]:text-black"
+                    className="aura-input rounded-xl px-4 py-3 text-sm text-gray-800"
                 >
                     <option value="1280x720">1280x720 (Wide)</option>
                     <option value="1024x1024">1024x1024 (Square)</option>
@@ -228,32 +228,33 @@ export default function PollinationsGenerator() {
              </div>
 
              <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">Prompts (One per line)</label>
+                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Prompts (One per line)</label>
                 <textarea 
                     value={promptsText}
                     onChange={e => setPromptsText(e.target.value)}
-                    className="h-40 bg-black/20 border border-white/10 rounded-2xl p-4 text-sm text-white resize-none focus:outline-none focus:border-sky-500 transition-colors"
+                    className="h-40 aura-input rounded-2xl p-4 text-sm text-gray-800 resize-none transition-all"
                 />
              </div>
 
              <div className="flex gap-4">
                 {isRunning ? (
-                    <Button onClick={stopBatch} variant="default" className="w-full bg-red-500 hover:bg-red-600">
+                    <Button onClick={stopBatch} variant="default" className="w-full bg-red-400 hover:bg-red-500 border-none text-white shadow-md">
                         <StopCircle className="mr-2 h-4 w-4" /> Stop Batch
                     </Button>
                 ) : (
-                    <Button onClick={startBatch} variant="default" className="w-full">
+                    <Button onClick={startBatch} className="w-full btn-aura text-white font-bold tracking-wide border-none">
                         <PlayCircle className="mr-2 h-4 w-4" /> Run Batch
                     </Button>
                 )}
                 <Button 
                     onClick={downloadZip} 
-                    variant="secondary"
+                    variant="outline"
+                    className="bg-white/50 border-gray-200 hover:bg-white text-gray-700 hover:text-aura-purple transition-all duration-300 shadow-sm"
                     disabled={images.filter(i => i.status === 'success').length === 0 || isZipping}
                 >
                     {isZipping ? (
                         <>
-                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                            <div className="w-4 h-4 border-2 border-neon-blue border-t-transparent rounded-full animate-spin mr-2" />
                             Preparing...
                         </>
                     ) : (
@@ -269,9 +270,9 @@ export default function PollinationsGenerator() {
         <div className="glass-panel p-6 rounded-3xl flex flex-col">
             {/* Header with count */}
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold flex items-center gap-2">
-                    <ImageIcon className="h-5 w-5 text-sky-400" />
-                    Gallery
+                <h3 className="text-lg font-bold flex items-center gap-2 text-gray-800">
+                    <ImageIcon className="h-5 w-5 text-aura-magenta" />
+                    Studio Gallery
                 </h3>
                 <span className="text-sm text-gray-400">
                     {images.length > 0 && images.filter(i => i.status === 'success').length === images.length 
@@ -286,7 +287,7 @@ export default function PollinationsGenerator() {
                 <div className="mb-4">
                     <div className="h-2 bg-black/40 rounded-full overflow-hidden">
                         <div 
-                            className="h-full bg-gradient-to-r from-sky-500 to-emerald-500 transition-all duration-300"
+                            className="h-full bg-gradient-to-r from-neon-blue via-purple-500 to-neon-purple transition-all duration-300 shadow-[0_0_10px_rgba(0,240,255,0.5)]"
                             style={{ width: `${(images.filter(i => i.status === 'success').length / images.length) * 100}%` }}
                         />
                     </div>
@@ -302,7 +303,7 @@ export default function PollinationsGenerator() {
                     {images.map((img) => (
                         <div 
                             key={img.index} 
-                            className={`relative group ${getAspectClass()} bg-black/40 rounded-xl overflow-hidden border border-white/5 cursor-pointer`}
+                            className={`relative group ${getAspectClass()} bg-white/40 rounded-xl overflow-hidden border border-gray-200 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
                             onClick={() => img.status === 'success' && setSelectedImage(img)}
                         >
                             {img.status === 'success' && img.url ? (
@@ -335,16 +336,16 @@ export default function PollinationsGenerator() {
                                                     a.click();
                                                 }
                                             }}
-                                            className="bg-white/20 hover:bg-white/30 p-2 rounded-lg transition-colors"
+                                            className="bg-white/80 hover:bg-white text-gray-800 p-2 rounded-lg transition-colors shadow-sm"
                                             title="Download"
                                         >
-                                            <Download className="h-4 w-4 text-white" />
+                                            <Download className="h-4 w-4 text-gray-800" />
                                         </button>
                                     </div>
                                     <p className="text-[10px] text-white/80 line-clamp-2 leading-tight">{img.prompt}</p>
                                 </div>
                             )}
-                            <div className="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded-full text-[10px] text-white font-mono backdrop-blur-md">
+                            <div className="absolute top-2 left-2 bg-white/80 px-2 py-0.5 rounded-full text-[10px] text-gray-800 font-bold tracking-wider backdrop-blur-md shadow-sm border border-white/50">
                                 #{img.index}
                             </div>
                         </div>
@@ -357,20 +358,23 @@ export default function PollinationsGenerator() {
       {/* RIGHT: Console */}
       <div className="glass-panel p-6 rounded-3xl flex flex-col h-[400px] lg:h-auto">
          <div className="flex justify-between items-center mb-4">
-             <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400">System Logs</h3>
-             <button onClick={() => setLogs([])} className="text-xs text-gray-500 hover:text-white flex items-center gap-1 transition-colors">
+             <h3 className="text-sm flex items-center gap-2 font-bold uppercase tracking-wider text-aura-purple">
+                <span className="w-2 h-2 rounded-full bg-aura-purple animate-pulse" />
+                Activity Log
+             </h3>
+             <button onClick={() => setLogs([])} className="text-xs text-gray-400 hover:text-aura-magenta flex items-center gap-1 transition-colors">
                  <Trash2 className="h-3 w-3" /> Clear
              </button>
          </div>
-         <div ref={logContainerRef} className="flex-1 overflow-y-auto font-mono text-xs space-y-1 bg-black/40 p-4 rounded-xl border border-white/5">
+         <div ref={logContainerRef} className="flex-1 overflow-y-auto font-mono text-xs space-y-1 aura-input p-4 rounded-xl border-none">
             {logs.length === 0 && <div className="text-gray-600 italic">Ready...</div>}
             {logs.map((log, i) => (
                 <div key={i} className={cn(
                     "break-all",
-                    log.type === 'error' && "text-red-400",
-                    log.type === 'warn' && "text-amber-400",
-                    log.type === 'success' && "text-green-400",
-                    log.type === 'info' && "text-sky-300/80"
+                    log.type === 'error' && "text-red-500",
+                    log.type === 'warn' && "text-amber-500",
+                    log.type === 'success' && "text-emerald-500",
+                    log.type === 'info' && "text-gray-700"
                 )}>
                     <span className="opacity-30 mr-2">[{log.time}]</span>
                     {log.msg}
@@ -396,18 +400,20 @@ export default function PollinationsGenerator() {
                 </button>
                 
                 {/* Image */}
-                <img 
-                    src={selectedImage.url} 
-                    alt={selectedImage.prompt}
-                    className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
-                    onClick={(e) => e.stopPropagation()}
-                />
+                <div className="relative group p-1 rounded-xl bg-white shadow-[0_10px_40px_rgba(0,0,0,0.1)]">
+                    <img 
+                        src={selectedImage.url} 
+                        alt={selectedImage.prompt}
+                        className="w-full h-auto max-h-[80vh] object-contain rounded-lg bg-gray-100"
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                </div>
                 
                 {/* Info bar */}
-                <div className="mt-4 flex items-center justify-between bg-white/10 rounded-lg p-4">
+                <div className="mt-4 flex items-center justify-between glass-panel rounded-lg p-5 border-white border-[1px]">
                     <div className="flex-1 pr-4">
-                        <p className="text-white/60 text-xs mb-1">#{selectedImage.index}</p>
-                        <p className="text-white text-sm line-clamp-2">{selectedImage.prompt}</p>
+                        <p className="text-gray-500 text-xs mb-1 font-bold tracking-wider">#{selectedImage.index}</p>
+                        <p className="text-gray-800 text-sm line-clamp-2 font-medium">{selectedImage.prompt}</p>
                     </div>
                     <button
                         onClick={(e) => {

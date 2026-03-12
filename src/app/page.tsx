@@ -7,12 +7,13 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col p-4 md:p-6 lg:p-8 gap-6 max-w-[1800px] mx-auto">
       <header className="flex flex-col md:flex-row justify-between items-center gap-4 shrink-0">
-        <div>
-           <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
-             ImageGenAI <span className="text-sky-500">Pro</span>
+         <div className="text-center w-full">
+           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-3">
+             <span className="text-aura-gradient">AuraGen</span>
+             <span className="text-gray-800 ml-3 font-light">Studio</span>
            </h1>
-           <p className="text-sm text-gray-500">Professional AI Generation Suite</p>
-        </div>
+           <p className="text-base md:text-lg text-gray-500 font-medium tracking-wide">Ethereal AI Creation Suite</p>
+         </div>
       </header>
 
       <div className="flex-1 overflow-visible">
