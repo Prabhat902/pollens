@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-// import { Download, Trash2, StopCircle, PlayCircle, Image as ImageIcon, Sparkles } from "lucide-react";
+import { Download, Trash2, StopCircle, PlayCircle, Image as ImageIcon, Sparkles } from "lucide-react";
 import JSZip from "jszip";
 import { cn } from "@/lib/utils";
 
